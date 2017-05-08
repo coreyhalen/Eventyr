@@ -2,6 +2,7 @@
  * Created by coreyjones on 5/1/17.
  */
 import java.util.Scanner;
+import java.util.Random;
 
 public class Game
 {
@@ -24,11 +25,12 @@ public class Game
         do
         {
            String decision = in.next();
+           Random rand = new Random();
 
            if (decision.equalsIgnoreCase("Adventure"))
             {
-                Enemy monster = new Enemy()
-
+                int monsterLevel = rand.nextInt(Hero.getLevel() + 1) + (Hero.getLevel() - 1);
+                Enemy monster = new Enemy(monsterLevel);
             }
         }
 

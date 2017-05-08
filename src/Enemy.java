@@ -11,8 +11,8 @@ public class Enemy
     Enemy(int initLevel)
     {
         level = 1;
-        health = 5 * level;
-        damage = 1 * level;
+        health = 10 + (5 * level);
+        damage = 1 + (1 * level);
     }
 
 }

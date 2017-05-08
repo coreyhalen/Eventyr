@@ -17,8 +17,8 @@ public class Player
     {
         playName = initName;
         level = 1;
-        health = 10;
-        damage = 1;
+        health = 10 + (5 * level);
+        damage = 1 + (1 * level);
 
     }
 
