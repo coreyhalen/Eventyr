@@ -28,6 +28,12 @@ public class BattleSequence {
 
     }
 
+
+    public void checkOnHit(Character attacker, Character defender) {
+
+        if (attacker)
+    }
+
     public static void battle(Player player) {
 
         System.out.println("You are being challenged!");
@@ -66,7 +72,7 @@ public class BattleSequence {
             Driver.pressToContinue();
             System.out.println("It dropped some loot!");
             Driver.pressToContinue();
-            Item drop = player.lootDrop();
+            Item drop = Item.lootDrop(player);
             drop.itemCompare(player);
             System.out.println("Do you want to equip this item? (Your previous item will be lost!)\n(1) Yes\n(2) No");
             int equipChoice = in.nextInt();

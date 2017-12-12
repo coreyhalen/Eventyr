@@ -4,7 +4,7 @@ import java.util.Random;
  * switch statement to grant an ability at a certain point
  */
 
-public abstract class BaseAbility {
+public abstract class Ability {
 
     private String name;
     private int critChance;

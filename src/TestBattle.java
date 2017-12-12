@@ -11,20 +11,30 @@ public class TestBattle {
 
         player.setPlayerClass(PlayerClasses.NINJA);
 
-        player.grantShadowSlash();
-        player.grantShurikenToss();
+        System.out.println("# of drops: ");
+        int numDrops = in.nextInt();
 
-        while (input != 2) {
-            Driver.choices();
-            input = in.nextInt();
-            if (input ==1){
-
-                BattleSequence.battle(player);
-            }
-            else if (input == 2){
-                break;
-            }
+        for (int i = 0; i < numDrops; i++){
+            Item drop = Item.lootDrop(player);
+            System.out.println(drop.toString());
         }
+
+
+
+        NinjaQuestline.grantShadowSlash(player);
+        NinjaQuestline.grantShurikenToss(player);
+//
+//        while (input != 2) {
+//            Driver.choices();
+//            input = in.nextInt();
+//            if (input ==1){
+//
+//                BattleSequence.battle(player);
+//            }
+//            else if (input == 2){
+//                break;
+//            }
+//        }
 
         System.out.print("Until next time adventurer!");
     }

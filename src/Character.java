@@ -1,7 +1,6 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Random;
+import java.util.Stack;
 
 public class Character {
 
@@ -12,13 +11,15 @@ public class Character {
     private int agi;
     private int str;
     private int stam;
-    private int atkDmg;
-    private int splDmg;
     private int speed;
     private int currentSpeed;
-    private ArrayList<BaseAbility> spellBar;
+    private ArrayList<Ability> spellBar;
+    private ArrayList<Ability> onHitEffects;
+    private ArrayList<Stack<Ability>> endOfTurnEffects;
+    private ArrayList<Stack<Ability>> startOfTurnEffects;
 
-    public ArrayList<BaseAbility> getSpellBar() {
+
+    public ArrayList<Ability> getSpellBar() {
         return spellBar;
     }
 
@@ -78,22 +79,6 @@ public class Character {
         this.str = str;
     }
 
-    public int getAtkDmg() {
-        return atkDmg;
-    }
-
-    public void setAtkDmg(int atkDmg) {
-        this.atkDmg = atkDmg;
-    }
-
-    public int getSplDmg() {
-        return splDmg;
-    }
-
-    public void setSplDmg(int splDmg) {
-        this.splDmg = splDmg;
-    }
-
     public int getCurrentSpeed() {
         return currentSpeed;
     }
@@ -119,10 +104,8 @@ public class Character {
         str = 2 * level;
         maxHealth = 20 + (5 * stam);
         setCurrentHealth(30);
-        atkDmg = level;
-        splDmg = level;
 
-        this.spellBar = new ArrayList<BaseAbility>();
+        this.spellBar = new ArrayList<Ability>();
 
 
         if (getAgi() > 200) {
@@ -142,11 +125,6 @@ public class Character {
         return str;
     }
 
-    public static int randomEnemyLvl(Character player){
-        Random rand = new Random();
-        int enemyLvl = rand.nextInt(player.getLevel() + 1) + player.getLevel() - 1;
-        return enemyLvl;
-    }
 
     public static int randomNumRange(int start, int stop){
         Random rand = new Random();

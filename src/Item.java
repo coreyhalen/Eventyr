@@ -12,26 +12,21 @@ public class Item {
 
     }
 
-    public Item(int stam, int intel, int agi, int str, int speed, int slot){
+    public Item(int slot){
 
-        this.stam = stam;
-        this.intel = intel;
-        this.agi = agi;
-        this.str = str;
-        this.speed = speed;
         this.slot = slot;
 
-        switch (slot){
-            case 0: name = "Helmet";
-            break;
-            case 1: name = "Chest";
-            break;
-            case 2: name = "Legs";
-            break;
-            case 3: name = "Boots";
-            break;
-            case 4: name = "Weapon";
-            break;
+        switch (this.slot){
+            case 0: this.name = "Helmet";
+                break;
+            case 1: this.name = "Chestpiece";
+                break;
+            case 2: this.name = "Leggards";
+                break;
+            case 3: this.name = "Boots";
+                break;
+            case 4: this.name = "Weapon";
+                break;
         }
 
     }
@@ -94,7 +89,7 @@ public class Item {
 
     public String toString(){
 
-        String str = getName() + ": " + getName() + "\n";
+        String str = getName() + "\n";
 
         if (this.getStam() > 0) {
             String statStr = "Stamina: " + getStam();
@@ -116,26 +111,5 @@ public class Item {
         return str;
     }
 
-    public String itemCompare(Player player){
 
-        String str = this.getName() + "\n";
-
-        if (this.getStam() > 0 || player.getItem(this.getSlot()).getStam() > 0) {
-            str += "Stamina: " + getStam() + " (" + (this.getStam() - player.getItem(this.getSlot()).getStam() + ")\n");
-             }
-        if (this.getIntel() > 0 || player.getItem(this.getSlot()).getIntel() > 0) {
-            str += "Intelligence: " + getIntel() + " (" + (this.getIntel() - player.getItem(this.getSlot()).getIntel() + ")\n");
-        }
-        if (this.getAgi() > 0 || player.getItem(this.getSlot()).getAgi() > 0) {
-            str += "Agility: " + getAgi() + " (" + (this.getAgi() - player.getItem(this.getSlot()).getAgi() + ")\n");
-        }
-        if (this.getStr() > 0 || player.getItem(this.getSlot()).getStr() > 0) {
-            str += "Strength: " + getStr() + " (" + (this.getStr() - player.getItem(this.getSlot()).getStr() + ")\n");
-        }
-        if (this.getSpeed() > 0 || player.getItem(this.getSlot()).getSpeed() > 0) {
-            str += "Stamina: " + getSpeed() + " (" + (this.getSpeed() - player.getItem(this.getSlot()).getSpeed() + ")\n");
-        }
-
-        return str;
-    }
 }

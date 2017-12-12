@@ -6,3 +6,4 @@ public enum PlayerClasses {
     SAVAGE,
     CULTIST
 }
+

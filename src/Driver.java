@@ -29,16 +29,16 @@ public class Driver {
         System.out.print("It's not the nicest looking place, but I've seen worse. I'd say you'll fair well here " +
                         "with a little bit of help.");
         pressToContinue();
-        System.out.print("Lucky for you, I know every bottom feeder, mercenary and aspiring noble in this Hellhole." +
-               " But tell me, what makes " + playerName + " tick?\n");
+        System.out.println("Lucky for you, I know every bottom feeder, mercenary and aspiring noble in this Hellhole." +
+               " ");
 
         Player player = new Player(playerName);
 
         while (player.getPlayerClass() == null) {
-           System.out.println("\nChoose a response:\n(1) I like to live in the shadows. If my enemy hears or sees me, it's" +
-                   " already too late.\n(2) I fear nothing. The bones of my enemies will crush with every devastating" +
-                   "blow from my weapon.\n(3) Knowledge is power... no matter where it comes from, even if I have to" +
-                   " sacrifice my own blood.");
+           System.out.println("But tell me, what makes " + playerName + " tick?\nChoose a response:\n(1) I like to " +
+                   "live in the shadows. If my enemy hears or sees me, it's already too late.\n(2) I fear nothing. " +
+                   "The bones of my enemies will crush with every devastating blow from my weapon.\n(3) Knowledge is " +
+                   "power... no matter where it comes from, even if I have to sacrifice my own blood.");
            int classChoice = in.nextInt();
 
            switch (classChoice){
@@ -59,6 +59,7 @@ public class Driver {
                    switch (classChoice){
                        case 1:
                            player.setPlayerClass(PlayerClasses.NINJA);
+                           player.grantShadowSlash();
                            break;
                        case 2:
                            player.setPlayerClass(PlayerClasses.SAVAGE);

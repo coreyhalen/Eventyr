@@ -1,6 +1,6 @@
-public class NinjaDmgAbility extends NinjaBaseAbility {
+public class DmgAbility extends Ability {
 
-    public NinjaDmgAbility(String name, int statMulti, double ratio, int cd, int critChance, int strikes){
+    public DmgAbility(String name, int statMulti, double ratio, int cd, int critChance, int strikes){
 
         this.setName(name);
         this.setStatMulti(statMulti);
