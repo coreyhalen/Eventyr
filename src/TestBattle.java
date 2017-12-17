@@ -15,7 +15,7 @@ public class TestBattle {
         int numDrops = in.nextInt();
 
         for (int i = 0; i < numDrops; i++){
-            Item drop = Item.lootDrop(player);
+            Item drop = Weapon.weaponDrop(player);
             System.out.println(drop.toString());
         }
 

@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.Stack;
 
 public class Character {
 
+    private String name;
     private int level;
     private int maxHealth;
     private int currentHealth;
@@ -13,11 +15,41 @@ public class Character {
     private int stam;
     private int speed;
     private int currentSpeed;
+    private int atkDmg;
+    private PlayerClasses playerClass = null;
+    private Armor[] armorSlots = new Armor[4];
+    private Weapon[] weaponSlot = new Weapon[2];
     private ArrayList<Ability> spellBar;
     private ArrayList<Ability> onHitEffects;
     private ArrayList<Stack<Ability>> endOfTurnEffects;
     private ArrayList<Stack<Ability>> startOfTurnEffects;
 
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAtkDmg() {
+        return atkDmg;
+    }
+
+    public void setAtkDmg(int atkDmg) {
+        this.atkDmg = atkDmg;
+    }
+    public Armor getArmorSlot(int slot) {
+        return armorSlots[slot];
+    }
+
+    public void setArmorSlot(int slot, Armor armor){ this.armorSlots[slot] = armor; }
+
+    public Armor[] getArmorArray(){
+
+        return armorSlots;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public ArrayList<Ability> getSpellBar() {
         return spellBar;
@@ -95,8 +127,23 @@ public class Character {
         this.speed = speed;
     }
 
-    public Character() {
+    public PlayerClasses getPlayerClass() {
+        return playerClass;
+    }
 
+    public void setPlayerClass(PlayerClasses playerClass) {
+        this.playerClass = playerClass;
+    }
+
+    public Weapon getWeaponSlot(int slot) {
+        return weaponSlot[slot];
+    }
+
+    public void setWeaponSlot(int slot, Weapon weapon){
+        this.weaponSlot[slot] = weapon;
+    }
+
+    public Character() {
         level = 1;
         stam = 2 * level;
         intel = 2 * level;
@@ -104,16 +151,8 @@ public class Character {
         str = 2 * level;
         maxHealth = 20 + (5 * stam);
         setCurrentHealth(30);
-
+        speed = 10 + (int)Math.ceil(agi * .10);
         this.spellBar = new ArrayList<Ability>();
-
-
-        if (getAgi() > 200) {
-            speed = 10 + (int)Math.ceil(agi * .10);
-        } else {
-            speed = 30;
-        }
-
     }
 
     public String stringOut(){

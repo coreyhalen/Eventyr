@@ -3,6 +3,12 @@
  */
 public class Armor extends Item {
 
+    public void equip(Player player){
+        if (player.getArmorSlot(this.getSlot()) != null){
+            player.getInventory().add(player.getArmorSlot(this.getSlot()));
+        }
+        player.setArmorSlot(this.getSlot(), this);
+    }
 
     public void slotRoll() {
 
@@ -28,15 +34,15 @@ public class Armor extends Item {
         int level = player.getLevel();
         double baseStatRoll = Math.random() * 100;
         if (baseStatRoll < 33){
-            this.setName(" of the Evoker");
+            this.setName(this.getName() + " of the Evoker");
             this.setIntel(level);
             this.setStam(level);
         } else if (baseStatRoll >= 33 && baseStatRoll < 66){
-            this.setName(" of the Beserker");
+            this.setName(this.getName() + " of the Beserker");
             this.setStr(level);
             this.setStam(level);
         } else {
-            this.setName(" of the Shinokage");
+            this.setName(this.getName() + " of the Shinokage");
             this.setAgi(level);
             this.setStam(level);
         }
@@ -111,31 +117,30 @@ public class Armor extends Item {
 
     public String itemCompare(Player player){
 
-
-        System.out.printf(player.getItem(this.getSlot()).toString());
+        System.out.printf(player.getArmorSlot(this.getSlot()).toString());
 
         String str = this.getName() + "\n";
 
-        if (this.getStam() > 0 || player.getItem(this.getSlot()).getStam() > 0) {
-            str += "Stamina: " + getStam() + " (" + (this.getStam() - player.getItem(this.getSlot()).getStam() + ")\n");
+        if (this.getStam() > 0 || player.getArmorSlot(this.getSlot()).getStam() > 0) {
+            str += "Stamina: " + getStam() + " (" + (this.getStam() - player.getArmorSlot(this.getSlot()).getStam() + ")\n");
         }
-        if (this.getIntel() > 0 || player.getItem(this.getSlot()).getIntel() > 0) {
-            str += "Intelligence: " + getIntel() + " (" + (this.getIntel() - player.getItem(this.getSlot()).getIntel() + ")\n");
+        if (this.getIntel() > 0 || player.getArmorSlot(this.getSlot()).getIntel() > 0) {
+            str += "Intelligence: " + getIntel() + " (" + (this.getIntel() - player.getArmorSlot(this.getSlot()).getIntel() + ")\n");
         }
-        if (this.getAgi() > 0 || player.getItem(this.getSlot()).getAgi() > 0) {
-            str += "Agility: " + getAgi() + " (" + (this.getAgi() - player.getItem(this.getSlot()).getAgi() + ")\n");
+        if (this.getAgi() > 0 || player.getArmorSlot(this.getSlot()).getAgi() > 0) {
+            str += "Agility: " + getAgi() + " (" + (this.getAgi() - player.getArmorSlot(this.getSlot()).getAgi() + ")\n");
         }
-        if (this.getStr() > 0 || player.getItem(this.getSlot()).getStr() > 0) {
-            str += "Strength: " + getStr() + " (" + (this.getStr() - player.getItem(this.getSlot()).getStr() + ")\n");
+        if (this.getStr() > 0 || player.getArmorSlot(this.getSlot()).getStr() > 0) {
+            str += "Strength: " + getStr() + " (" + (this.getStr() - player.getArmorSlot(this.getSlot()).getStr() + ")\n");
         }
-        if (this.getSpeed() > 0 || player.getItem(this.getSlot()).getSpeed() > 0) {
-            str += "Stamina: " + getSpeed() + " (" + (this.getSpeed() - player.getItem(this.getSlot()).getSpeed() + ")\n");
+        if (this.getSpeed() > 0 || player.getArmorSlot(this.getSlot()).getSpeed() > 0) {
+            str += "Stamina: " + getSpeed() + " (" + (this.getSpeed() - player.getArmorSlot(this.getSlot()).getSpeed() + ")\n");
         }
 
         return str;
     }
 
-    public static Item lootDrop(Character player){
+    public static Item armorDrop(Character player){
 
         Armor drop = new Armor();
         drop.slotRoll();

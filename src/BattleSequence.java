@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class BattleSequence {
@@ -28,10 +27,21 @@ public class BattleSequence {
 
     }
 
+    public static Item lootDrop(Player player){
+
+        double roll = Math.random() * 5;
+
+        if (roll < 4){
+            return Armor.armorDrop(player);
+        } else {
+            return Weapon.weaponDrop(player);
+        }
+
+    }
+
 
     public void checkOnHit(Character attacker, Character defender) {
 
-        if (attacker)
     }
 
     public static void battle(Player player) {
@@ -72,15 +82,15 @@ public class BattleSequence {
             Driver.pressToContinue();
             System.out.println("It dropped some loot!");
             Driver.pressToContinue();
-            Item drop = Item.lootDrop(player);
-            drop.itemCompare(player);
+            Item drop = lootDrop(player);
+           // drop.itemCompare(player);
             System.out.println("Do you want to equip this item? (Your previous item will be lost!)\n(1) Yes\n(2) No");
             int equipChoice = in.nextInt();
-            System.out.println("You are about to replace " + player.getItem(drop.getSlot()).getName() + " with a " +
+            System.out.println("You are about to replace " + player.getArmorSlot(drop.getSlot()).getName() + " with a " +
             drop.getName() + ". Are you sure you want to do this?\n(1) Yes\n(2) No");
             int equipVerify = in.nextInt();
             if (equipVerify == 1){
-                player.equipItem(drop);
+             //   drop.equip(player);
                 System.out.println("YES! NEW LOOT!" + player.getName() + "'s stats: " + player.stringOut());
                 player.setCurrentHealth(player.getMaxHealth());
                 System.out.println("You're health has been restored!");

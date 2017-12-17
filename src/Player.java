@@ -1,37 +1,16 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Player extends Character {
 
-    private String name;
     private int money;
     private int currentExp;
     private int levelExp;
-    private PlayerClasses playerClass = null;
-    private Item[] armorSlots = new Item[4];
-    private Item[] weaponSlot = new Item[2];
+    private List<Item> inventory = new ArrayList<>();
 
-    public void equipItem(Item item) {
-
-        this.armorSlots[item.getSlot()] = item;
-
-    }
-
-    public String printItems(){
-        String str = "------------------------------------------------------------\n";
-
-        for (int i = 0; i < armorSlots.length; i++){
-            str += this.armorSlots[i].toString();
-        }
-
-        str += "------------------------------------------------------------\n";
-
-        return str;
-    }
-
-    public Item getItem(int slot) {
-        return armorSlots[slot];
-    }
-
-    public String getName() {
-        return name;
+    public List<Item> getInventory() {
+        return inventory;
     }
 
     public int getMoney() {
@@ -54,34 +33,37 @@ public class Player extends Character {
         this.currentExp = exp;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setMoney(int money) {
         this.money = money;
     }
 
-    public PlayerClasses getPlayerClass() {
-        return playerClass;
-    }
 
-    public void setPlayerClass(PlayerClasses playerClass) {
-        this.playerClass = playerClass;
-    }
 
     public Player(){
 
+    }
+
+    public String printPlayer(){
+        String str = "------------------------------------------------------------\n";
+
+        for (int i = 0; i < this.getArmorArray().length; i++){
+            str += this.getArmorSlot(i).toString();
+        }
+
+        str += "------------------------------------------------------------\n";
+
+        return str;
     }
 
     public Player(String name){
         super();
         setLevelExp(100);
         setCurrentExp(0);
-        for (int i = 0; i < 0; i++){
-            Item item = new Item(0);
+        for (int i = 0; i < 4; i++){
+            Armor item = new Armor();
+            item.setSlot(i);
             item.setName("Common" + item.getName());
-            this.equipItem(item);
+            item.equip(this);
         }
     }
 

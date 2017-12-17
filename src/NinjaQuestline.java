@@ -72,8 +72,14 @@ public abstract class NinjaQuestline extends Player {
         System.out.print("The Ninja strikes the target for a large amount of damage and has " +
                 "a 25% critical strike chance.");
         Driver.pressToContinue();
-        player.getSpellBar().add(new DmgAbility("Shadow Slash", 1, 2, 1,
-                25, 1));
+        Ability ability = new Ability();
+        ability.setName("Shadow Slash");
+        ability.setStatMulti(StatType.AGILITY);
+        ability.setRatio(2);
+        ability.setStrikes(1);
+        ability.setCritChance(25);
+        ability.setCd(3);
+        player.getSpellBar().add(ability);
     }
 
     public static void grantShurikenToss(Character player){
@@ -81,7 +87,13 @@ public abstract class NinjaQuestline extends Player {
         Driver.pressToContinue();
         System.out.print("The Ninja throws three deadly shuriken at the target, inflicting a small " +
                 "amount of damage, but strikes three separate times ");
-        player.getSpellBar().add(new DmgAbility("Shuriken Toss", 1, .75, 1,
-                10, 3));
+        Ability ability = new Ability();
+        ability.setName("Shuriken Toss");
+        ability.setStatMulti(StatType.AGILITY);
+        ability.setRatio(.75);
+        ability.setStrikes(3);
+        ability.setCritChance(10);
+        ability.setCd(2);
+        player.getSpellBar().add(ability);
     }
 }

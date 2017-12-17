@@ -8,13 +8,13 @@ public class Npc extends Character {
         this.setMaxHealth(50 + this.getStam() * 10);
     }
 
-    public Npc randomNpc(Character player){
+    public static Npc randomNpc(Character player){
 
         Npc enemy = new Npc(randomEnemyLvl(player));
         return enemy;
     }
 
-    public int randomEnemyLvl(Character player){
+    public static int randomEnemyLvl(Character player){
         Random rand = new Random();
         int enemyLvl = rand.nextInt(player.getLevel() + 1) + player.getLevel() - 1;
         return enemyLvl;

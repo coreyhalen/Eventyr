@@ -59,7 +59,7 @@ public class Driver {
                    switch (classChoice){
                        case 1:
                            player.setPlayerClass(PlayerClasses.NINJA);
-                           player.grantShadowSlash();
+                        //   player.grantShadowSlash();
                            break;
                        case 2:
                            player.setPlayerClass(PlayerClasses.SAVAGE);

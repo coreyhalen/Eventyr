@@ -1,15 +1,13 @@
-import java.util.Random;
-
 /**
  * switch statement to grant an ability at a certain point
  */
 
-public abstract class Ability {
+public class Ability {
 
     private String name;
     private int critChance;
     private double ratio;
-    private int statMulti;
+    private StatType statMulti;
     private int cd;
     private boolean avail;
     private int strikes;
@@ -39,11 +37,11 @@ public abstract class Ability {
         this.ratio = ScaleMulti;
     }
 
-    public int getStatMulti() {
+    public StatType getStatMulti() {
         return statMulti;
     }
 
-    public void setStatMulti(int statMulti) {
+    public void setStatMulti(StatType statMulti) {
         this.statMulti = statMulti;
     }
 
@@ -93,4 +91,56 @@ public abstract class Ability {
         }
         return result;
     }
+
+    public void castDmg(Character player, Character target){
+
+        int dmg = 0;
+
+        switch (this.getStatMulti()){
+            case AGILITY:
+                dmg = (int)(this.getRatio() * player.getAgi());
+                break;
+            case INTELLECT:
+                dmg = (int)(this.getRatio() * player.getIntel());
+                break;
+            case STRENGTH:
+                dmg = (int)(this.getRatio() * player.getStr());
+                break;
+            case ATKPOWER:
+
+        }
+
+        if (this.getStrikes() > 1){
+
+            for (int i = 0; i < this.getStrikes(); i++) {
+
+                if (this.critCalc() == true) {
+                    dmg += dmg * .5;
+                    target.setCurrentHealth(target.getCurrentHealth() - dmg);
+                    System.out.print(this.getName() + " critically hit the enemy for " + dmg + "!");
+                } else {
+                    target.setCurrentHealth(target.getCurrentHealth() - dmg);
+                    System.out.print(this.getName() + " hit the enemy for " + dmg + "!");
+                }
+                Driver.pressToContinue();
+            }
+        } else {
+
+            if (this.critCalc() == true && this.getStatMulti() != StatType.ATKPOWER) {
+                dmg += dmg * .5;
+                target.setCurrentHealth(target.getCurrentHealth() - dmg);
+                System.out.print(this.getName() + " critically hit the enemy for " + dmg + "!");
+            } else {
+                target.setCurrentHealth(target.getCurrentHealth() - dmg);
+                System.out.print(this.getName() + " hit the enemy for " + dmg + "!");
+            }
+            Driver.pressToContinue();
+        }
+    }
+
+    public void castHeal(Character player, Character Target){
+
+    }
+
+
 }
