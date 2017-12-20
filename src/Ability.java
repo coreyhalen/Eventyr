@@ -106,7 +106,7 @@ public class Ability {
             case STRENGTH:
                 dmg = (int)(this.getRatio() * player.getStr());
                 break;
-            case ATKPOWER:
+            case ATK:
 
         }
 
@@ -126,7 +126,7 @@ public class Ability {
             }
         } else {
 
-            if (this.critCalc() == true && this.getStatMulti() != StatType.ATKPOWER) {
+            if (this.critCalc() == true && this.getStatMulti() != StatType.ATK) {
                 dmg += dmg * .5;
                 target.setCurrentHealth(target.getCurrentHealth() - dmg);
                 System.out.print(this.getName() + " critically hit the enemy for " + dmg + "!");

@@ -61,27 +61,37 @@ public class Weapon extends Item {
         if (this.isTwoHand() == true){
             if (player.getWeaponSlot(0) != null){
                 System.out.print(player.getWeaponSlot(0).getName() + " has been moved to your inventory.");
+                player.setAtkDmg(player.getAtkDmg() - player.getWeaponSlot(0).getAtkDmg());
                 player.getInventory().add(player.getWeaponSlot(0));
             }
             if (player.getWeaponSlot(1) != null){
                 System.out.print(player.getWeaponSlot(1).getName() + " has been moved to your inventory.");
+                player.setAtkDmg(player.getAtkDmg() - player.getWeaponSlot(1).getAtkDmg());
                 player.getInventory().add(player.getWeaponSlot(1));
             }
             player.setWeaponSlot(0, this);
+            player.setAtkDmg(this.getAtkDmg());
             System.out.print(this.getName() + " is now equipped!");
         } else {
-            Scanner in = new Scanner(System.in);
-            System.out.print("Which hand would you like to hold this weapon with?\n(1) Left\n(2) Right");
-            int hand = in.nextInt();
-            if (hand == 1){
-                player.getInventory().add(player.getWeaponSlot(0));
-                player.setWeaponSlot(0, this);
+
+            if (player.getWeaponSlot(0) != null || player.getWeaponSlot(1) != null){
+                Scanner in = new Scanner(System.in);
+                System.out.print("Which hand would you like to hold this weapon with?\n(1) Left\n(2) Right");
+                int hand = in.nextInt();
+                if (hand == 1){
+                    player.getInventory().add(player.getWeaponSlot(0));
+                    player.setAtkDmg(player.getAtkDmg() - player.getWeaponSlot(0).getAtkDmg());
+                    player.setWeaponSlot(0, this);
+                    player.setAtkDmg(player.getAtkDmg() + this.getAtkDmg());
+                } else {
+                    player.getInventory().add(player.getWeaponSlot(1));
+                    player.setAtkDmg(player.getAtkDmg() - player.getWeaponSlot(1).getAtkDmg());
+                    player.setWeaponSlot(1, this);}
+                player.setAtkDmg(player.getAtkDmg() + this.getAtkDmg());
             } else {
-                player.getInventory().add(player.getWeaponSlot(1));
-                player.setWeaponSlot(1, this);}
-
+                player.setWeaponSlot(0, this);
+            }
         }
-
     }
 
     public void typeRoll() {
@@ -229,60 +239,36 @@ public class Weapon extends Item {
         return str;
     }
 
-    public int getWidth(String name){
-
-        int totalLength = name.length();
-
-        if (totalLength%2 == 1){
-            totalLength += 5;
-        } else {
-            totalLength += 4;
+    public String statLine(StatType stat, int totalLength){
+        String subStr = "";
+        switch (stat){
+            case ATK:
+                subStr = firstHalf("Attack:", totalLength);
+                subStr += "  " + this.getAtkDmg();
+                subStr = secondHalf(subStr, totalLength);
+                break;
+            case AGILITY:
+                subStr = firstHalf("Agility:", totalLength);
+                subStr += "  " + this.getAgi();
+                subStr = secondHalf(subStr, totalLength);
+                break;
+            case INTELLECT:
+                subStr = firstHalf("Intellect:", totalLength);
+                subStr += "  " + this.getIntel();
+                subStr = secondHalf(subStr, totalLength);
+                break;
+            case STRENGTH:
+                subStr = firstHalf("Strength:", totalLength);
+                subStr += "  " + this.getStr();
+                subStr = secondHalf(subStr, totalLength);
+                break;
+            case SPEED:
+                subStr = firstHalf("Speed:", totalLength);
+                subStr += "  " + this.getSpeed();
+                subStr = secondHalf(subStr, totalLength);
+                break;
         }
-        return totalLength;
-    }
-
-    public String firstHalf(String str, int length){
-        while (str.length() < length/2){
-            str = " " + str;
-        }
-        str = "*" + str;
-        return str;
-    }
-
-    public String secondHalf(String str, int length){
-        while (str.length() < length/2){
-            str = str + " ";
-        }
-        str = str + "*\n";
-        return str;
-    }
-
-    public String printBar(int length){
-        String str = "*";
-        for (int i = 0; i < length; i++){
-            str += "-";
-        }
-        str += "*\n";
-        return str;
-    }
-
-    public String emptyLine(int length){
-        String str = "*";
-        for (int i = 0; i < length; i++){
-            str += " ";
-        }
-        str += "*\n";
-        return str;
-    }
-
-    public String nameLine(String name){
-        String str = "*";
-        if (name.length()%2 == 1){
-            str += "  " + name + "   *\n";
-        } else {
-            str += "  " + this.getName() + "  *\n";
-        }
-        return str;
+        return subStr;
     }
 
 
@@ -292,62 +278,25 @@ public class Weapon extends Item {
         str += nameLine(this.getName());
         str += printBar(totalLength);
         str += emptyLine(totalLength);
-
-        if (this.getStam() > 0) {
-            str += firstHalf("Attack:", totalLength);
-            str += secondHalf("  " + this.getAtkDmg(), totalLength);
+        if (this.getAtkDmg() > 0){
+            str += statLine(StatType.ATK, totalLength);
         }
         if (this.getIntel() > 0) {
-            str += firstHalf("Intellect:", totalLength);
-            str += secondHalf("  " + this.getIntel(), totalLength);
+            str += statLine(StatType.INTELLECT, totalLength);
         }
         if (this.getAgi() > 0) {
-            str += firstHalf("Agility:", totalLength);
-            str += secondHalf("  " + this.getAgi(), totalLength);
+            str += statLine(StatType.AGILITY, totalLength);
         }
         if (this.getStr() > 0) {
-            str += firstHalf("Strength:", totalLength);
-            str += secondHalf("  " + this.getStr(), totalLength);
+            str += statLine(StatType.STRENGTH, totalLength);
         }
         if (this.getSpeed() > 0) {
-            str += firstHalf("Speed:", totalLength);
-            str += secondHalf("  " + this.getSpeed(), totalLength);
+            str += statLine(StatType.SPEED, totalLength);
         }
         str += emptyLine(totalLength);
         str += printBar(totalLength);
         return str;
     }
-
-    /**
-     *
-     *
-     *
-     *
-     * -------------------------------------------*
-     *   Serrated Deadly Greataxe of the Templar  *
-     *   Bolstered Chestpiece of the Beserker     *
-     * -------------------------------------------*
-     *      Attack Damage:  163                   *
-     *           Strength:  47                    *
-     *                                            *
-     *                                            *
-     * On Hit Effect: Each strike of this weapon  *
-     * causes the enemy to bleed for .25% of      *
-     * their maximum health over the next 2 turns.*
-     * This effect stacks up to 3 times.          *
-     * -------------------------------------------*
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     */
-
-
 
     public static Item weaponDrop(Character player){
 

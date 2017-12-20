@@ -87,6 +87,62 @@ public class Item {
         this.slot = slot;
     }
 
+    public int getWidth(String name){
+
+        int totalLength = name.length();
+
+        if (totalLength%2 == 1){
+            totalLength += 5;
+        } else {
+            totalLength += 4;
+        }
+        return totalLength;
+    }
+
+    public String firstHalf(String str, int length){
+        while (str.length() < length/2){
+            str = " " + str;
+        }
+        str = "*" + str;
+        return str;
+    }
+
+    public String secondHalf(String str, int length){
+        while (str.length() <= length){
+            str += " ";
+        }
+        str += "*\n";
+        return str;
+    }
+
+    public String printBar(int length){
+        String str = "*";
+        for (int i = 0; i < length; i++){
+            str += "-";
+        }
+        str += "*\n";
+        return str;
+    }
+
+    public String emptyLine(int length){
+        String str = "*";
+        for (int i = 0; i < length; i++){
+            str += " ";
+        }
+        str += "*\n";
+        return str;
+    }
+
+    public String nameLine(String name){
+        String str = "*";
+        if (name.length()%2 == 1){
+            str += "  " + name + "   *\n";
+        } else {
+            str += "  " + this.getName() + "  *\n";
+        }
+        return str;
+    }
+
     public String toString(){
 
         String str = getName() + "\n";
@@ -110,6 +166,7 @@ public class Item {
         str += "\n";
         return str;
     }
+
 
 
 }

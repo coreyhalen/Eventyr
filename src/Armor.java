@@ -140,6 +140,67 @@ public class Armor extends Item {
         return str;
     }
 
+
+
+    public String statLine(StatType stat, int totalLength){
+        String subStr = "";
+        switch (stat){
+            case STAMINA:
+                subStr = firstHalf("Stamina:", totalLength);
+                subStr += "  " + this.getStam();
+                subStr = secondHalf(subStr, totalLength);
+                break;
+            case AGILITY:
+                subStr = firstHalf("Agility:", totalLength);
+                subStr += "  " + this.getAgi();
+                subStr = secondHalf(subStr, totalLength);
+                break;
+            case INTELLECT:
+                subStr = firstHalf("Intellect:", totalLength);
+                subStr += "  " + this.getIntel();
+                subStr = secondHalf(subStr, totalLength);
+                break;
+            case STRENGTH:
+                subStr = firstHalf("Strength:", totalLength);
+                subStr += "  " + this.getStr();
+                subStr = secondHalf(subStr, totalLength);
+                break;
+            case SPEED:
+                subStr = firstHalf("Speed:", totalLength);
+                subStr += "  " + this.getSpeed();
+                subStr = secondHalf(subStr, totalLength);
+                break;
+        }
+        return subStr;
+    }
+
+
+    public String toString(){
+        int totalLength = getWidth(this.getName());
+        String str = printBar(totalLength);
+        str += nameLine(this.getName());
+        str += printBar(totalLength);
+        str += emptyLine(totalLength);
+        if (this.getStam() > 0) {
+            str += statLine(StatType.STAMINA, totalLength);
+        }
+        if (this.getIntel() > 0) {
+            str += statLine(StatType.INTELLECT, totalLength);
+        }
+        if (this.getAgi() > 0) {
+            str += statLine(StatType.AGILITY, totalLength);
+        }
+        if (this.getStr() > 0) {
+            str += statLine(StatType.STRENGTH, totalLength);
+        }
+        if (this.getSpeed() > 0) {
+            str += statLine(StatType.SPEED, totalLength);
+        }
+        str += emptyLine(totalLength);
+        str += printBar(totalLength);
+        return str;
+    }
+
     public static Item armorDrop(Character player){
 
         Armor drop = new Armor();

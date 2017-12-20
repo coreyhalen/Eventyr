@@ -17,8 +17,6 @@ public class Character {
     private int currentSpeed;
     private int atkDmg;
     private PlayerClasses playerClass = null;
-    private Armor[] armorSlots = new Armor[4];
-    private Weapon[] weaponSlot = new Weapon[2];
     private ArrayList<Ability> spellBar;
     private ArrayList<Ability> onHitEffects;
     private ArrayList<Stack<Ability>> endOfTurnEffects;
@@ -35,16 +33,6 @@ public class Character {
 
     public void setAtkDmg(int atkDmg) {
         this.atkDmg = atkDmg;
-    }
-    public Armor getArmorSlot(int slot) {
-        return armorSlots[slot];
-    }
-
-    public void setArmorSlot(int slot, Armor armor){ this.armorSlots[slot] = armor; }
-
-    public Armor[] getArmorArray(){
-
-        return armorSlots;
     }
 
     public String getName() {
@@ -133,14 +121,6 @@ public class Character {
 
     public void setPlayerClass(PlayerClasses playerClass) {
         this.playerClass = playerClass;
-    }
-
-    public Weapon getWeaponSlot(int slot) {
-        return weaponSlot[slot];
-    }
-
-    public void setWeaponSlot(int slot, Weapon weapon){
-        this.weaponSlot[slot] = weapon;
     }
 
     public Character() {

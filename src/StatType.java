@@ -9,5 +9,5 @@ public enum StatType {
     AGILITY,
     SPEED,
     CRITICALCHANCE,
-    ATKPOWER
+    ATK
 }

@@ -8,13 +8,25 @@ public class Player extends Character {
     private int currentExp;
     private int levelExp;
     private List<Item> inventory = new ArrayList<>();
+    private Weapon[] weaponSlot = new Weapon[2];
+    private Armor[] armorSlots = new Armor[4];
 
-    public List<Item> getInventory() {
-        return inventory;
+    public Armor getArmorSlot(int slot) {
+        return armorSlots[slot];
     }
+
+    public void setArmorSlot(int slot, Armor armor){ this.armorSlots[slot] = armor; }
+
+    public Armor[] getArmorArray(){ return armorSlots; }
+
+    public List<Item> getInventory() { return inventory; }
 
     public int getMoney() {
         return money;
+    }
+
+    public void addMoney(int money) {
+        this.money += money;
     }
 
     public int getCurrentExp() {
@@ -33,26 +45,12 @@ public class Player extends Character {
         this.currentExp = exp;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
-    }
+    public Weapon getWeaponSlot(int slot) { return weaponSlot[slot]; }
 
-
+    public void setWeaponSlot(int slot, Weapon weapon){ this.weaponSlot[slot] = weapon; }
 
     public Player(){
 
-    }
-
-    public String printPlayer(){
-        String str = "------------------------------------------------------------\n";
-
-        for (int i = 0; i < this.getArmorArray().length; i++){
-            str += this.getArmorSlot(i).toString();
-        }
-
-        str += "------------------------------------------------------------\n";
-
-        return str;
     }
 
     public Player(String name){
@@ -65,7 +63,61 @@ public class Player extends Character {
             item.setName("Common" + item.getName());
             item.equip(this);
         }
+        Weapon weapon = new Weapon(ItemTypes.SWORD);
+        weapon.setAtkDmg(5);
+        weapon.setName("Dull Sword");
+        weapon.equip(this);
     }
+
+    public String printPlayer(){
+        String role = "";
+        switch (this.getPlayerClass()){
+            case NINJA:
+                role = "Ninja";
+                break;
+            case SAVAGE:
+                role = "Warrior";
+                break;
+            case CULTIST:
+                role = "Mage";
+                break;
+        }
+
+        String.format("%14s:%-8s", )
+
+        String.format("%5s", this.getName());
+        String str = "*------------------------------------------------------------*\n";
+
+        for (int i = 0; i < this.getArmorArray().length; i++){
+            str += this.getArmorSlot(i).toString();
+        }
+
+        str += "*------------------------------------------------------------*\n";
+
+        return str;
+    }
+
+    /**
+     *
+     * first half left justified, 14 spaces
+     *
+     * second half 8 spaces
+     *
+     *
+     *--------------------*
+     *   HVLN             *
+     *   Level 20 Warrior *
+     *--------------------*
+     *   Attack:    347   *
+     *   Stamina:   156   *
+     *   Intellect: 156   *
+     *   Agility:   123   *
+     *   Strength:   23   *
+     *   Speed:      20   *
+     *--------------------*
+     *
+     *
+     */
 
     public void levelUp(){
         this.setLevel(getLevel() + 1);
