@@ -6,26 +6,26 @@ public class Item {
     private int agi;
     private int str;
     private int speed;
-    private int slot;
+    private ItemTypes slot;
 
     public Item(){
 
     }
 
-    public Item(int slot){
+    public Item(ItemTypes slot){
 
         this.slot = slot;
 
         switch (this.slot){
-            case 0: this.name = "Helmet";
+            case HELMET: this.name = "Helmet";
                 break;
-            case 1: this.name = "Chestpiece";
+            case CHESTPIECE: this.name = "Chestpiece";
                 break;
-            case 2: this.name = "Leggards";
+            case LEGS: this.name = "Leggards";
                 break;
-            case 3: this.name = "Boots";
+            case BOOTS: this.name = "Boots";
                 break;
-            case 4: this.name = "Weapon";
+            case WEAPON: this.name = "Weapon";
                 break;
         }
 

@@ -83,7 +83,7 @@ public class Player extends Character {
                 break;
         }
 
-        String.format("%14s:%-8s", )
+        //String.format("%14s:%-8s");
 
         String.format("%5s", this.getName());
         String str = "*------------------------------------------------------------*\n";
